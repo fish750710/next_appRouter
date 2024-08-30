@@ -1,8 +1,34 @@
 "use client";
-import { useRouter, notFound } from "next/navigation";
+import Image from "next/image";
+import { useRouter, notFound, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
+interface ActivityData {
+  eventId: string;
+  eventTitle: string;
+  activityTitle: string;
+  activityDesc: string;
+  uploadImage: string;
+}
 const Activity = ({ params }: { params: { eventId: string } }) => {
   const router = useRouter();
+  const [activityData, setActivityData] = useState<ActivityData | null>(null);
   const isNotFound = false;
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query");
+
+  const fetchActivity = async () => {
+    const res = await fetch(`/api/activity/${params.eventId}`).then((res) =>
+      res.json()
+    );
+    if (res.status === 200) {
+      setActivityData(res.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchActivity();
+  }, []);
 
   if (isNotFound) return notFound();
 
@@ -15,8 +41,22 @@ const Activity = ({ params }: { params: { eventId: string } }) => {
         {"<"}
       </button>
       <section className="mt-4">
-        content
-        <h3 className="text-lg font-semibold">eventId: {params.eventId}</h3>
+        <ul>
+          <li>eventId: {activityData?.eventId}</li>
+          <li>eventTitle:{activityData?.eventTitle}</li>
+          <li>activityTitle:{activityData?.activityTitle}</li>
+          <li>activityDesc:{activityData?.activityDesc}</li>
+          <li>
+            {activityData?.uploadImage && (
+              <Image
+                src={activityData.uploadImage}
+                alt="image"
+                width={300}
+                height={150}
+              />
+            )}
+          </li>
+        </ul>
       </section>
     </div>
   );
