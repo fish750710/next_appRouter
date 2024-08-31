@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import useStore from "@/store";
 
-// server fetch
+// TODO: nextjs app router server fetch
 // export default async function serverHome() {
 //   const infoData = await fetch("https://api.vercel.app/blog").then((res) =>
 //     res.json()
@@ -14,11 +15,24 @@ import { useEffect, useState } from "react";
 //     </main>
 //   );
 // }
+
+type userInfo = {
+  author: string;
+  category: string;
+  content: string;
+  date: string;
+  id: number;
+  title: string;
+};
+
 export default function Home() {
-  const [infoData, setInfoData] = useState<any>(null);
+  const { loading, setLoading, infoData, setInfoData } = useStore();
+
   const fetchUserInfo = async () => {
-    const res = await fetch("/api/userInfo").then((res) => res.json());
+    setLoading(true);
+    const res:userInfo[] = await fetch("/api/userInfo").then((res) => res.json());
     setInfoData(res);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -30,7 +44,20 @@ export default function Home() {
       <Link href="/deposit/" className="text-blue-500">
         Go to Deposit Page
       </Link>
-      {infoData ? <p>{JSON.stringify(infoData)}</p> : <p>Loading...</p>}
+      {!loading && infoData ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {infoData.map((item: userInfo) => (
+            <div key={item.id} className="bg-white shadow-md rounded-lg p-4">
+              <h3 className="text-xl font-bold mb-2">ID: {item.id}</h3>
+              <h4 className="text-lg font-semibold mb-2">{item.title}</h4>
+              <p className="text-sm text-gray-600 mb-2">{item.date}</p>
+              <p className="text-gray-800">{item.content}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </main>
   );
 }
