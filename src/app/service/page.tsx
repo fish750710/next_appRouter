@@ -11,9 +11,9 @@ const blobToText = (blob: Blob) => {
 };
 
 export default function Mine() {
-  const socket = useRef(null);
+  const socket = useRef<WebSocket | null>(null);
   const [val, setVal] = useState("");
-  const [textMessages, setTextMessages] = useState([]); // 已處理好了的文字訊息
+  const [textMessages, setTextMessages] = useState<string[]>([]); // 已處理好了的文字訊息
 
   useEffect(() => {
     // 创建 WebSocket 连接
@@ -50,9 +50,11 @@ export default function Mine() {
   const handleMessage = async (messages: Blob | string) => {
     if (messages instanceof Blob) {
       const text = await blobToText(messages);
-      setTextMessages((prevMessages) => [...prevMessages, text]);
+      setTextMessages((prevMessages) => [...prevMessages, text] as string[]);
     } else {
-      setTextMessages((prevMessages) => [...prevMessages, messages]);
+      setTextMessages(
+        (prevMessages) => [...prevMessages, messages] as string[]
+      );
     }
   };
   // console.log(messages, "messages", handleMessage(messages), textMessages);

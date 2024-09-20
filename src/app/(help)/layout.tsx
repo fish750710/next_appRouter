@@ -7,10 +7,8 @@ export const metadata: Metadata = {
 
 export default function helpLayout({
   children,
-  menu,
 }: {
   children: React.ReactNode;
-  menu: React.ReactNode;
 }) {
   return (
     <div className="flex mt-10">

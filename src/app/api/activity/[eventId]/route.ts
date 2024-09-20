@@ -1,7 +1,14 @@
 import { cookies, headers } from "next/headers";
 import { type NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, { params }) {
+interface IParams {
+  eventId: string;
+}
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: IParams }
+) {
   const { eventId } = params;
 
   // const searchParams = request.nextUrl.searchParams;

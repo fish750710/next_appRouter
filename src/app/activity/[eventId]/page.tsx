@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRouter, notFound, useSearchParams } from "next/navigation";
+import { useRouter, notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface ActivityData {
@@ -14,8 +14,8 @@ const Activity = ({ params }: { params: { eventId: string } }) => {
   const router = useRouter();
   const [activityData, setActivityData] = useState<ActivityData | null>(null);
   const isNotFound = false;
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query");
+  // const searchParams = useSearchParams();
+  // const query = searchParams.get("query");
 
   const fetchActivity = async () => {
     const res = await fetch(`/api/activity/${params.eventId}`).then((res) =>
