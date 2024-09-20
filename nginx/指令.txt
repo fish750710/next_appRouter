@@ -1,0 +1,30 @@
+保存退出 :wq
+強制保存退出 :wq!
+退出 :q!
+保存 :w
+
+
+在 Vim 中，默认是正常模式，不能直接编辑文件。要开始修改文件，你需要进入插入模式。
+按下 i：在光标所在处开始插入文本。
+按下 I：在光标所在行的行首插入文本。
+按下 a：在光标后面开始插入文本。
+按下 A：在光标所在行的行尾插入文本。
+按下 o：在当前行的下一行插入一行并进入插入模式。
+按下 O：在当前行的上一行插入一行并进入插入模式。
+
+u：撤销上一步操作。
+Ctrl + r：重做撤销的操作。
+
+sudo nginx -t  # 检查配置文件是否有语法错误
+sudo nginx -s reload 重新加載配置
+
+
+ubuntu:
+sudo systemctl stop nginx 停止
+sudo systemctl restart nginx 重啟
+sudo systemctl status nginx 狀態
+
+
+nano:
+Ctrl + o 保存
+Ctrl + x 退出

@@ -1,0 +1,17 @@
+docker images 查構建結果
+docker-compose build 打包 docker
+docker-compose up 運行容器
+
+docker-compose up --build 打包後運行
+docker-compose up -d --build 打包後背景運行
+
+docker ps 查看運行容器
+
+docker-compose down 停止容器
+docker-compose down --rmi all 停止和刪除容器
+
+docker system prune *清除鏡像資料
+docker rmi <IMAGE_ID> *刪除單個鏡像
+
+ 
+
