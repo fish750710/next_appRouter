@@ -23,7 +23,7 @@ RUN npm run build
 # 暴露對應端口
 EXPOSE 3000
 
-#RUN chmod +x start.sh
+RUN chmod +x start.sh
 
 # 啟動 Node.js 伺服器
 CMD [ "./start.sh" ]
