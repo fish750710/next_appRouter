@@ -3,7 +3,7 @@
 FROM node:20
 
 # 设置工作目录
-WORKDIR /src
+WORKDIR /app
 
 # 复制 package.json 和 package-lock.json 到工作目录
 COPY package*.json ./
@@ -23,6 +23,7 @@ RUN npm run build
 # 暴露對應端口
 EXPOSE 3000
 
+#RUN chmod +x start.sh
+
 # 啟動 Node.js 伺服器
-# CMD [ "npm", "run", "dev" ]
-#CMD [ "node", "./server/ws.js" ]
+CMD [ "./start.sh" ]

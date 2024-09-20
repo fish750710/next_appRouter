@@ -17,7 +17,7 @@ export default function Mine() {
 
   useEffect(() => {
     // 创建 WebSocket 连接
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket("ws://localhost:8787");
     socket.current = ws;
 
     // 监听 WebSocket 消息

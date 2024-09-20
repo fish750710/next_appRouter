@@ -41,7 +41,7 @@ wss.on("connection", (ws) => {
 });
 
 // 启动 HTTP 服务器
-const port = 8080;
+const port = 8787;
 server.listen(port, () => {
   console.log(`WebSocket server is running on ws://localhost:${port}`);
 });
