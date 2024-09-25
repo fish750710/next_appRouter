@@ -1,4 +1,7 @@
 docker images 查構建結果
+docker run xxx 運行
+docker stop xxx 停止
+
 docker-compose build 打包 docker
 docker-compose up 運行容器
 
@@ -13,5 +16,9 @@ docker-compose down --rmi all 停止和刪除容器
 docker system prune *清除鏡像資料
 docker rmi <IMAGE_ID> *刪除單個鏡像
 
+
+docker save -o ~/next-app_frontend.tar next-app_frontend:latest 映像檔儲存
+
  
+docker load -i next-app_frontend.tar 載入映像檔
 
