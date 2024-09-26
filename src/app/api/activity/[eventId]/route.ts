@@ -1,5 +1,19 @@
 import { cookies, headers } from "next/headers";
 import { type NextRequest } from "next/server";
+import Redis from "ioredis";
+
+const redis = new Redis({
+  host: "127.0.0.1",
+  port: 6379,
+});
+
+/** ubuntu
+ * redis-cli
+ * 查詢 Keys: SCAN 0
+ * 刪除 Key: DEL myKey
+ * 清除當前數據庫: FLUSHDB
+ * 設置過期時效 秒: EXPIRE myKey 60
+ */
 
 interface IParams {
   eventId: string;
@@ -48,5 +62,21 @@ export async function GET(
     msg: "success",
     status: 200,
   };
-  return Response.json(res);
+  // 取 Redis
+  const cacheValue = await redis.get("activity_key");
+
+  if (!cacheValue) {
+    // 設置 Redis
+    await redis.set(
+      "activity_key",
+      JSON.stringify({ eventId: eventId, eventTitle: "活動標題 Redis" })
+    );
+    return Response.json(res);
+  } else {
+    return Response.json({
+      data: JSON.parse(cacheValue),
+      msg: "success",
+      status: 200,
+    });
+  }
 }
