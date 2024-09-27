@@ -1,13 +1,15 @@
 import { cookies, headers } from "next/headers";
 import { type NextRequest } from "next/server";
-import Redis from "ioredis";
+// import Redis from "ioredis";
 
-const redis = new Redis({
-  host: "127.0.0.1",
-  port: 6379,
-});
+// const redis = new Redis({
+//   host: "127.0.0.1",
+//   port: 6379,
+// });
 
 /** ubuntu
+ * 運行: redis-server
+ * 確認運行狀況 PONG正常 : redis-cli ping
  * redis-cli
  * 查詢 Keys: SCAN 0
  * 刪除 Key: DEL myKey
@@ -63,20 +65,21 @@ export async function GET(
     status: 200,
   };
   // 取 Redis
-  const cacheValue = await redis.get("activity_key");
+  // const cacheValue = await redis.get("activity_key");
 
-  if (!cacheValue) {
-    // 設置 Redis
-    await redis.set(
-      "activity_key",
-      JSON.stringify({ eventId: eventId, eventTitle: "活動標題 Redis" })
-    );
-    return Response.json(res);
-  } else {
-    return Response.json({
-      data: JSON.parse(cacheValue),
-      msg: "success",
-      status: 200,
-    });
-  }
+  // if (!cacheValue) {
+  //   // 設置 Redis
+  //   await redis.set(
+  //     "activity_key",
+  //     JSON.stringify({ eventId: eventId, eventTitle: "活動標題 Redis" })
+  //   );
+  //   return Response.json(res);
+  // } else {
+  //   return Response.json({
+  //     data: JSON.parse(cacheValue),
+  //     msg: "success",
+  //     status: 200,
+  //   });
+  // }
+  return Response.json(res);
 }

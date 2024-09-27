@@ -3,6 +3,12 @@ import Image from "next/image";
 import { useRouter, notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
+// export function generateMetadata({ params }: { params: { eventId: string } }) {
+//   return {
+//     title: `活動 ID => ${params.eventId}`,
+//   };
+// }
+
 interface ActivityData {
   eventId: string;
   eventTitle: string;

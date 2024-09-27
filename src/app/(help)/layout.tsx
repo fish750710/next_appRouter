@@ -1,3 +1,5 @@
+// help 群組管理，路由不會有 /help/xxx
+
 import type { Metadata } from "next";
 import Menu from "@/components/Help/Menu";
 
